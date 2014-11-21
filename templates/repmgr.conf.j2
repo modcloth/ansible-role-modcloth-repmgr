@@ -4,25 +4,25 @@
 ###################################################
 
 # Cluster name
-cluster={{repmgr_master_cluster}}
+cluster={{repmgr_cluster}}
 
 # Node ID
-node={{repmgr_master_node_id}}
+node={{repmgr_node_id}}
 
 # Connection information
-conninfo='host=127.0.0.1 user={{repmgr_master_postgres_user}}'
-rsync_options={{ repmgr_master_rsync_options }}
+conninfo='host=127.0.0.1 user={{repmgr_postgres_user}}'
+rsync_options={{ repmgr_rsync_options }}
 
 # Autofailover options
-failover={{repmgr_master_failover}}
+failover={{repmgr_failover}}
 
 # Default: NOTICE
-loglevel={{repmgr_master_loglevel}}
+loglevel={{repmgr_loglevel}}
 
 # Logging facility: possible values are STDERR or - for Syslog integration - one of LOCAL0, LOCAL1, ..., LOCAL7, USER
 # Default: STDERR
-logfacility={{repmgr_master_logfacility}}
+logfacility={{repmgr_logfacility}}
 
-pg_bindir={{repmgr_master_pg_bindir}}
+pg_bindir={{repmgr_pg_bindir}}
 
 # vim:filetype=dosini
