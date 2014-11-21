@@ -1,0 +1,36 @@
+---
+- name: install repmgr
+  apt: name={{ item }} state=present
+  with_items:
+  - repmgr
+  - postgresql-{{ postgresql_version }}-repmgr
+
+- name: create postgresql conf dir
+  file:
+    path: "{{ repmgr_postgresql_conf_dir }}"
+    state: directory
+    recurse: yes
+- name: update postgres settings
+  template:
+    src: postgresql.conf.j2
+    dest: "{{ repmgr_postgresql_conf_dir }}/{{ repmgr_postgresql_conf_file }}"
+  register: postgresql_conf
+
+- name: create repmgr conf dir
+  file:
+    path: "{{ repmgr_conf_dir }}"
+    state: directory
+    recurse: yes
+- name: create repmgr conf
+  template:
+    src: repmgr.conf.j2
+    dest: "{{ repmgr_conf_dir }}/{{ repmgr_conf_file }}"
+  register: repmgr_conf
+
+- name: restart postgres
+  service: name={{ repmgr_postgresql_service_name }} state=restarted
+  when: postgresql_conf.changed
+
+- name: register with repmgr
+  shell: "repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} --verbose master register"
+  when: repmgr_conf.changed and repmgr_is_master|bool

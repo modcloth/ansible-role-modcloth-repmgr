@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Rafe Colton and Jesse Szwedko
+  description:
+  company: ModCloth
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty # possibly others
+  categories:
+  - database
+  - database:sql
+dependencies: []

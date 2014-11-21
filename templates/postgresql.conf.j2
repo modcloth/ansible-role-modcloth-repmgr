@@ -1,0 +1,12 @@
+# {{ansible_managed}}
+
+wal_level = 'hot_standby'
+max_wal_senders = {{repmgr_postgresql_max_wal_senders}}
+wal_keep_segments = {{repmgr_postgresql_wal_keep_segments}}
+
+archive_mode = on
+archive_command = '{{repmgr_postgresql_archive_command}}'
+
+hot_standby = on
+
+# vim:filetype=dosini
